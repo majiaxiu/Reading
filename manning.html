@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+.g-hed-section {
+  clear: left;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.g-related-article {
+  font-family: "nyt-franklin", arial;
+  font-size:12px;
+  /*display: block;*/
+}
+
+.g-published-date {
+  float: left;
+  font-size: 11px;
+  font-weight: 300;
+  color: #999;
+}
+
+.g-strike-bg {
+  fill: #f0f0f0;
+}
+
+.g-strike-label {
+  font-size: 10px;
+  font-weight: 300;
+  text-anchor: end;
+}
+
+
+.g-source,
+.g-note {
+  font-size: 11px;
+  font-weight: 300;
+  color: #999;
+  line-height: 1.3em;
+  padding-bottom: 10px;
+}
+
+.g-byline {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.g-byline-container {
+  max-width: 730px;
+  margin: 0 auto;
+}
+
+/*g-graphic*/
+.g-graphic {
+  position: relative;
+  display: inline-block;
+  margin: 10px 20px 0 20px;
+  font-family: "nyt-franklin", arial;
+}
+
+.g-manning-hed {
+  font: 300 40px/40px "nyt-cheltenham", georgia;
+  margin: 30px 0 6px 0;
+}
+
+.g-readin {
+  font-family: "nyt-cheltenham", Georgia;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.3em;
+  margin: 20px 0 40px 0;
+}
+
+.g-search-prompt {
+  margin-bottom: 2px;
+  display: inline-block;
+}
+
+/* Chart Header */
+
+.g-chart-header {
+  margin: 10px 0 0;
+  width: 50%;
+}
+
+.g-chart-header .g-chart-hed {
+  font-size: 16px;
+  margin: 0 0 15px;
+  line-height: 1.3em;
+}
+
+.g-chart-header .g-search {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.g-chart-header .g-search input {
+  display: inline-block;
+  width: 200px;
+  margin-left: 10px;
+}
+
+/* Axis */
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis .domain {
+  fill: none;
+  stroke: #ccc;
+}
+
+.axis text {
+  font-size: 11px;
+  font-weight: 200;
+  fill: #777;
+}
+
+.axis .tick line {
+  stroke: #ccc;
+}
+
+/* Team */
+
+.g-team-bg {
+  fill: #f0f0f0;
+}
+
+.g-team-name {
+  font-size: 11px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.g-team-baseline {
+  stroke: #dedede;
+  shape-rendering: crispEdges;
+  stroke-dasharray: 5;
+}
+
+.g-streak-comets {
+  stroke: none;
+  /*fill: #a3b8c2;*/
+  fill: #cdcdcd;
+}
+
+.g-streak-comets .g-streak-team-record {
+  /*fill: #3997c6;*/
+  /*fill: #e2ad24; jd gold*/
+  fill: #F3C755; /*close #2*/
+}
+
+.g-streak-labels {
+  font-size: 11px;
+  font-weight: 200;
+  pointer-events: none;
+}
+
+/*.g-streak-labels .g-streak-label-hover {
+  font-weight: 200 !important;
+}*/
+
+.g-streak-labels rect {
+  fill: #fff;
+}
+
+/*.g-2013-streak .g-streak-label {
+  text-anchor: end;
+  fill: magenta;
+}*/
+
+.g-streak-comets .g-streak-team-record.g-player-hovered {
+  fill:#b6861e;
+}
+
+.g-streak-comets.g-streak-key:hover,
+.g-streak-comets .g-player-hovered {
+  /*fill: magenta;*/
+  /*fill:#86861E;*/
+  fill: #999;
+}
+
+.g-streak-comets .g-player-selected {
+  /*fill: red;*/
+  /*fill: #3f656c;*/
+  fill: #1A92F0;
+}
+
+.g-streak-comets .g-player-hovered.g-player-selected {
+  fill: #2B5C83;
+}
+
+.g-streak-labels text {
+  -webkit-transition: opacity 250ms linear;
+  -moz-transition: opacity 250ms linear;
+  -ms-transition: opacity 250ms linear;
+  -o-transition: opacity 250ms linear;
+  transition: opacity 250ms linear;
+}
+
+.g-streak-label-select {
+  font-weight: bold;
+}
+
+.g-streak-label-occluded {
+  opacity: 0;
+}
+
+.g-streak-overlays {
+  fill: none;
+  pointer-events: all;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .g-annotations .g-annotation {
+    display: block;
+    width: auto;
+  }
+
+  .leaderboard-ad {
+    display: none;
+  }
+
+  .g-hed-section {
+    text-align: left;
+  }
+
+  .g-manning-hed {
+    font-size: 33px;
+    margin: 20px 0 5px 0;
+    line-height: 1.2em;
+  }
+
+  .g-annotations .g-annotation.g-search-anno {
+    display: block;
+    float: none;
+    margin-top: 20px;
+  }
+
+  .g-annotations .g-ann-key {
+    margin-bottom: 20px;
+  }
+
+  .g-annotations .g-ann-eli {
+    display: none;
+  }
+
+  .g-annotations  .g-ann-favre {
+    display: none;
+  }
+
+  .g-search-prompt {
+    font-weight: bold;
+  }
+
+  .g-annotations .g-strike-anno, .g-annotations .g-active-journeymen, .g-annotations .g-journeymen, .g-strike-label {
+    display: none;
+  }
+
+  .g-annotation-line {
+    display: none;
+  }
+
+  .g-annotation-arrow {
+    display: none;
+  }
+
+  .g-annotations.bottom {
+    min-height: 30px;
+  }
+
+  .masthead-section {
+    display: none !important;
+  }
+
+  .g-strike-bg {
+    display: none;
+  }
+
+  .g-hed-section {
+    text-align: left;
+  }
+
+  .g-manning-hed {
+    font-size: 33px;
+    margin: 20px 0 5px 0;
+    line-height: 1.2em;
+  }
+
+  .masthead-section {
+    display: none !important;
+  }
+
+  .g-strike-bg {
+    display: none;
+  }
+
+}
+
+/* For general iPad layouts */
+@media only screen and (device-width: 768px) {
+  .leaderboard-ad {
+    display: none;
+  }
+}
+</style>
+
+<style>
+</style>
+  <div class="navigation-share">
+    <a href="#" class="navigation-share-facebook"><div class="navigation-share-icon"></div></a>
+    <a href="#" class="navigation-share-twitter"><div class="navigation-share-icon"></div></a>
+  </div>
+</div>
+
+<!--[if lte IE 8]>
+<script type="text/javascript" src="http://graphics8.nytimes.com/newsgraphics/2013/09/28/eli-manning-milestone/17fe7ffe133c196d6381cb0e69e05e6bf602fa4b/fallback.js"></script>
+<script type="text/javascript">d3 = {selectAll: $};</script>
+<img src="http://graphics8.nytimes.com/newsgraphics/2013/09/28/eli-manning-milestone/17fe7ffe133c196d6381cb0e69e05e6bf602fa4b/fallback.png" style="display:block;width:970px;margin:auto;">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+
+<div class="g-graphic">
+  <div class="g-hed-section">
+    <div class="g-manning-hed">可視化</div>
+  </div>
+  <div class="g-chart"></div>
+</div>
+<!-- <script src="http://graphics8.nytimes.com/newsgraphics/2013/09/28/eli-manning-milestone/17fe7ffe133c196d6381cb0e69e05e6bf602fa4b/lib.js"></script> -->
+<script src="http://127.0.0.1:50/D3.js"></script>
+<script>
+var numTeams = 32,
+    currentYear = 1970,
+    endDate = 2013.25;
+
+var margin = {top: 80, right: 0, bottom: 20, left: 80},
+    width,
+    cometHeight = 3,
+    cometPadding = 16,
+    labelHeight = 16,
+    height = (cometHeight + cometPadding) * (numTeams + 2),
+    strikeWeeks = ["1987-04", "1987-05", "1987-06"];
+
+var graphic = d3.select(".g-chart");
+
+var svgNode = graphic.append("svg")
+    .attr("height", height + margin.top + margin.bottom);
+
+var svg = svgNode.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var yearScale = d3.scale.linear()
+    .domain([currentYear, endDate])
+    .range([0, width]);
+
+// d3.json("http://graphics8.nytimes.com/newsgraphics/2013/09/28/eli-manning-milestone/17fe7ffe133c196d6381cb0e69e05e6bf602fa4b/data.json", ahaha);
+
+d3.json("http://127.0.0.1:50/data.json", ahaha);
+
+// d3.json("./ data.json", function(data){
+//  console.log(data);
+// });
+
+function flattenStreaks(streaksByTeamByPlayer) {
+  var streaks = [];
+
+  for (var player in streaksByTeamByPlayer) {
+    var playerStreaksByTeam = streaksByTeamByPlayer[player];
+    for (var team in playerStreaksByTeam) {
+      var playerTeamStreaks = playerStreaksByTeam[team];
+      for (var i = 0, n = playerTeamStreaks.length; i < n; ++i) {
+        var streak = playerTeamStreaks[i];
+        streaks.push(playerTeamStreaks[i] = {
+          "player": player,
+          "team": team,
+          "start": streak[0],
+          "end": streak[1],
+          "length": streak[2]
+        });
+      }
+    }
+  }
+
+  return streaks;
+}
+
+function ahaha(error, data) {
+  var teamNameByKey = data.teams,
+      playerNameByKey = data.players,
+      streaksByTeamByPlayer = data.streaks,
+      streaks = flattenStreaks(streaksByTeamByPlayer);
+
+  var maxStreakLengthByTeam = d3.nest()
+      .key(function(d) { return d.team; })
+      .rollup(function(streaks) { return d3.max(streaks, function(d) { return d.length; }); })
+      .map(streaks, d3.map);
+
+  var maxStreakLengthByPlayer = d3.nest()
+      .key(function(d) { return d.player; })
+      .rollup(function(streaks) { return d3.max(streaks, function(d) { return d.length; }); })
+      .map(streaks, d3.map);
+
+  var streaksByTeam = d3.nest()
+      .key(function(d) { return d.team; })
+      .sortKeys(function(a, b) { return maxStreakLengthByTeam.get(b) - maxStreakLengthByTeam.get(a); })
+      .sortValues(function(a, b) { return a.start - b.start; })
+      .entries(streaks);
+
+  streaks.forEach(function(streak) {
+    if (maxStreakLengthByTeam.get(streak.team) === streak.length) streak.teamRecord = true;
+    if (maxStreakLengthByPlayer.get(streak.player) === streak.length) streak.playerRecord = true;
+  });
+
+  var strikeLine = svg.append("line")
+      .attr("class", "g-annotation-line")
+      .attr("y2", height);
+
+  var arrow = svg.append("path")
+      .attr("d", "M0,0L-5,-5L-5,5z")
+      .attr("class", "g-annotation-arrow");
+
+  var strikeLabel = svg.append("text")
+      .attr("class", "g-strike-label")
+      .text("Players’ strike");
+
+  var team = svg.selectAll(".g-team")
+      .data(streaksByTeam)
+    .enter().append("g")
+      .attr("class", "g-team")
+      .attr("transform", function(d, i) { return "translate(0, " + ((i + 1.5) * (cometPadding + cometHeight)) + ")"; })
+      .each(function() { this.parentNode.insertBefore(this, this.parentNode.firstChild); }); // reverse
+
+  team.append("text")
+      .attr("class", "g-team-name")
+      .attr("dy", 5)
+      .attr("dx", -margin.left)
+      .text(function(d) { return teamNameByKey[d.key]; });
+
+  var teamBaseline = team.append("line")
+      .attr("class", "g-team-baseline");
+
+  var streakComet = team.append("g")
+      .attr("class", "g-streak-comets")
+    .selectAll("path")
+      .data(function(d) { return d.values; })
+    .enter().append("path")
+      .attr("class", function(d) { return "g-player-" + d.player + (d.teamRecord ? " g-streak-team-record" : "") + (d.playerRecord ? " g-streak-player-record" : ""); });
+
+  var streakLabel = team.append("g")
+      .attr("class", "g-streak-labels")
+    .selectAll("text")
+      .data(function(d) { return d.values.filter(function(d) { return d.teamRecord; }); })
+    .enter().append("text")
+      .attr("class", function(d) { return "g-player-" + d.player + (d.teamRecord ? " g-streak-team-record" : "") + (d.playerRecord ? " g-streak-player-record" : ""); })
+      .call(renderStreakLabel);
+
+  var streakOverlay = team.append("g")
+      .attr("class", "g-streak-overlays")
+    .selectAll("rect")
+      .data(function(d) { return d.values; })
+    .enter().append("rect")
+      .attr("y", -(cometHeight + cometPadding) / 2)
+      .attr("height", cometHeight + cometPadding)
+      .on("click", function(d) { playerselected(d.player); d3.event.stopPropagation(); })
+      .on("mouseover", function(d) { playerovered(d.player, d); })
+      .on("mouseout", function(d) { playerouted(d); });
+
+  d3.select(".g-streak-key").append("path")
+      .attr("transform", "translate(-36,11)")
+      .style("fill", "#cdcdcd")
+      .call(renderComet, 80);
+
+  var topAxis = d3.svg.axis()
+      .scale(yearScale)
+      .orient("top")
+      .tickFormat(function(d) { return d; });
+
+  var bottomAxis = d3.svg.axis()
+      .scale(yearScale)
+      .orient("bottom")
+      .tickFormat(function(d) { return d; });
+
+  var topAxisContainer = svg.append("g")
+      .attr("class", "y axis");
+
+  var bottomAxisContainer = svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(0, " + height + ")");
+
+  graphic
+      .on("click", function() { playerselected("MannEl00"); });
+
+  d3.select(window)
+      .on("resize", resized);
+
+  // -----------search bar----------------
+
+  var ugc = d3.select(".g-search").append("div")
+      .attr("class", "g-form-container g-prechart")
+
+  d3.select(".g-form-container")
+    .append("select")
+      .attr("class", "chosen-select")
+      .attr("tabindex", 2)
+    .selectAll("option")
+      .data(d3.entries(playerNameByKey).sort(function(a, b) { return d3.ascending(a.key, b.key); }))
+    .enter().append("option")
+      .attr("value", function(d) { return d.key; })
+      .text(function(d) { return d.value + " (" + maxStreakLengthByPlayer.get(d.key) + ")"; });
+
+  $(".chosen-select")
+      .chosen({width: "100%"})
+      .change(function(e) { playerselected(this.value); })
+      .val("MannEl00")
+      .trigger("chosen:updated");
+
+  var playerAnnotation = d3.selectAll(".g-annotation-player")
+      .datum(function() { return this.getAttribute("data-player-key"); })
+      .on("click", function(d) { playerselected(d); d3.event.preventDefault(); })
+      .on("mouseover", function(d) { playerovered(d); })
+      .on("mouseout", function() { playerouted(); });
+
+  resized();
+  playerselected("MannEl00");
+
+  function resized() {
+    width = innerWidth - 40 - margin.left - margin.right;
+    svgNode.attr("width", width + margin.left + margin.right);
+    yearScale.range([0, width]);
+
+    streakComet
+        .attr("transform", function(d) { return "translate(" + yearScale(d.start) + ",0)"; })
+        .call(renderComet, function(d) { return yearScale(d.end) - yearScale(d.start); });
+
+    streakLabel
+        .call(updateStreakLabel)
+        .call(occludeStreakLabel);
+
+    streakOverlay
+        .attr("x", function(d) { return yearScale(d.start); })
+        .attr("width", function(d) { return yearScale(d.end) - yearScale(d.start); });
+
+    teamBaseline
+        .attr("x2", width);
+
+    topAxisContainer.call(topAxis);
+    bottomAxisContainer.call(bottomAxis);
+
+    strikeLine
+        .attr("x1", yearScale(1987.25))
+        .attr("x2", yearScale(1987.25));
+
+    strikeLabel
+        .attr("x", yearScale(1986.7))
+        .attr("y", height - 6);
+
+    arrow
+        .attr("transform", "translate(" + yearScale(1987.2) + "," + (height - 8)  + ")")
+  }
+
+  function renderComet(path, width) {
+    path.attr("d", function() {
+      var w = Math.max(1, (typeof width === "function" ? width.apply(this, arguments) : width) - .5),
+          m = w / 10,
+          ab = w - Math.sqrt(w) * .6,
+          ae = w,
+          offset = cometHeight / 2,
+          t = Math.max(offset, Math.sqrt(w / 26) * 3);
+      return  "M0," + -offset +
+              "L0," + offset +
+              "Q" + ae + "," + offset + "," + ab + "," + t +
+              "L" + ae + "," + 0 +
+              "L" + ab + "," + -t +
+              "Q" + ab + "," + -offset + "," + m + "," + -offset +
+              "z";
+    });
+  }
+
+  function renderStreakLabel(text) {
+    text
+        .attr("dy", "-4px")
+        .text(function(d) { return playerNameByKey[d.player] + " (" + d.length  + ")"; });
+  }
+
+  function updateStreakLabel(text) {
+    text
+        .attr("x", function(d) { return Math.min(width - (d.labelWidth = this.getComputedTextLength()), yearScale(d.start)); });
+  }
+
+  function occludeStreakLabel(text) {
+    text.forEach(function(group) {
+      group.sort(function(a, b) { // priority order of labels
+        a = a.__data__, b = b.__data__;
+        return a.hover - b.hover;
+      });
+      for (var i0 = 0, n = group.length; i0 < n; ++i0) {
+        group[i0].__data__.occluded = false;
+      }
+      for (var i0 = 0, n = group.length; i0 < n; ++i0) {
+        var e0 = group[i0], d0 = e0.__data__, x00 = Math.min(width - d0.labelWidth, yearScale(d0.start)), x01 = x00 + d0.labelWidth;
+        for (var occlude = false, i1 = i0 + 1; i1 < n; ++i1) {
+          var e1 = group[i1], d1 = e1.__data__, x10 = Math.min(width - d1.labelWidth, yearScale(d1.start)), x11 = x10 + d1.labelWidth;
+          if (!d1.occluded && x10 <= x01 && x11 >= x00) {
+            occlude = true;
+            break;
+          }
+        }
+        d3.select(e0).classed("g-streak-label-occluded", d0.occluded = occlude);
+      }
+    });
+  }
+
+  function playerovered(player, streak) {
+    streakComet
+        .classed("g-player-hovered", function(d) { return d.hover = d.player === player; });
+
+    if (streak) {
+      team.filter(function(d) { return d.key === streak.team; })
+        .select(".g-streak-labels")
+        .selectAll("text")
+          .data([streak], function(d) { return d.start; })
+        .enter().append("text")
+          .attr("class", "g-streak-label g-streak-label-hover")
+          .call(renderStreakLabel)
+          .call(updateStreakLabel);
+
+      streakLabel = team.select(".g-streak-labels").selectAll("text")
+          .call(occludeStreakLabel);
+    }
+  }
+
+  function playerouted(streak) {
+    streakComet
+        .classed("g-player-hovered", function(d) { return d.hover = false; });
+
+    d3.select(".g-streak-label-hover")
+        .remove();
+
+    streakLabel = team.select(".g-streak-labels").selectAll("text")
+        .call(occludeStreakLabel);
+  }
+
+  function playerselected(player) {
+    d3.select(".g-streak-labels .g-streak-label-select:not(.g-streak-team-record)")
+        .remove();
+
+    streakComet
+        .classed("g-player-selected", function(d) { return d.player === player; });
+
+    playerAnnotation
+        .classed("g-player-selected", function(d) { return d === player; });
+
+    var streak = d3.select(".g-player-selected.g-streak-player-record").datum();
+
+    var selectStreakLabel = team.filter(function(d) { return d.key === streak.team; })
+      .select(".g-streak-labels")
+      .selectAll("text")
+        .data([streak], function(d) { return d.start; });
+
+    selectStreakLabel
+        .classed("g-streak-label-select", true)
+        .classed("g-streak-label-hover", false)
+        .call(updateStreakLabel);
+
+    selectStreakLabel.enter().append("text")
+        .attr("class", "g-streak-label g-streak-label-select")
+        .call(renderStreakLabel)
+        .call(updateStreakLabel);
+
+    streakLabel = team.select(".g-streak-labels").selectAll("text")
+        .call(occludeStreakLabel);
+
+    $(".chosen-select")
+        .val(player)
+        .trigger("chosen:updated");
+  }
+}
+</script>
